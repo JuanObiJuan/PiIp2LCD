@@ -3,6 +3,8 @@ var sleep = require('./node_modules/sleep/');
 var GrovePi = require('node-grovepi').GrovePi
 
 var ip = require('ip')
+var os = require("os");
+var hostname = os.hostname();
 
 var Board = GrovePi.board
 
@@ -56,10 +58,11 @@ var board = new Board({
         console.log('GrovePi Version :: ' + board.version())
 
         var i2c1 = i2c.openSync(1);
-        setText(i2c1, 'IP Address \n'+ip.address());
+        setText(i2c1,hostname+' \n'+ip.address());
         setRGB(i2c1, 55, 55, 255);
         i2c1.closeSync();
       }
     }
   })
+
 board.init();
